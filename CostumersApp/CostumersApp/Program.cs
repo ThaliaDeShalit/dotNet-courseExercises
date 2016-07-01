@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CostumersApp
 {
+    // delegate for Ex4
     internal delegate bool CostumerFilter(Costumer costumer);
 
     class Program
