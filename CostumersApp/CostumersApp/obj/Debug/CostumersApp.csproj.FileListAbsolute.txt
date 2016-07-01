@@ -1,0 +1,6 @@
+C:\Users\Thalia\Desktop\CodeValue\HW\CostumersApp\CostumersApp\bin\Debug\CostumersApp.exe.config
+C:\Users\Thalia\Desktop\CodeValue\HW\CostumersApp\CostumersApp\bin\Debug\CostumersApp.exe
+C:\Users\Thalia\Desktop\CodeValue\HW\CostumersApp\CostumersApp\bin\Debug\CostumersApp.pdb
+C:\Users\Thalia\Desktop\CodeValue\HW\CostumersApp\CostumersApp\obj\Debug\CostumersApp.csprojResolveAssemblyReference.cache
+C:\Users\Thalia\Desktop\CodeValue\HW\CostumersApp\CostumersApp\obj\Debug\CostumersApp.exe
+C:\Users\Thalia\Desktop\CodeValue\HW\CostumersApp\CostumersApp\obj\Debug\CostumersApp.pdb
