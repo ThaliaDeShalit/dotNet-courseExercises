@@ -103,7 +103,7 @@ namespace Rationals
             {
                 return "1";
             }
-
+            
             // making sure that in case numerator is positive and denominator is negative, the minus sign is infornt of the rational
             if (Denominator < 0)
             {
@@ -115,6 +115,12 @@ namespace Rationals
             }
 
             sb.Append(Numerator);
+
+            if (Denominator == 1 || Denominator == -1)
+            {
+                return sb.ToString();
+            }
+
             sb.Append("/");
             if (newDenominator != 0)
             {
@@ -126,6 +132,36 @@ namespace Rationals
             }
 
             return sb.ToString();
+        }
+
+        public static Rational operator +(Rational x, Rational y)
+        {
+            return x.Add(y);
+        }
+
+        public static Rational operator -(Rational x, Rational y)
+        {
+            return x.Add(y.Mul(new Rational(-1)));
+        }
+
+        public static Rational operator *(Rational x, Rational y)
+        {
+            return x.Mul(y);
+        }
+
+        public static Rational operator /(Rational x, Rational y)
+        {
+            return x.Mul(new Rational(y.Denominator, y.Numerator));
+        }
+
+        public static implicit operator Rational(int x)
+        {
+            return new Rational(x);
+        }
+
+        public static explicit operator double(Rational x)
+        {
+            return ((double)x.Numerator / (double)x.Denominator);
         }
     }
 }

@@ -36,6 +36,18 @@ namespace Rationals
             Rational r5 = new Rational(4, 16);
             Console.WriteLine("{0} / {1} = {2} = {3}", 4, 16, r5, r5.DoubleValue);
 
+            int x = 2;
+            Rational r6 = x;
+            Rational r7 = new Rational(2, 10);
+            double d = (double)r7;
+
+            Console.WriteLine("int x = 2, Rational r6 = x = {0}", r6);        
+            Console.WriteLine("Rational r7 = {0}, double d = (double)r7 = {1}", r7, d);
+
+
+            Console.WriteLine("{0} * {1} = {2}", r5, r6, r5 * r6);
+            Console.WriteLine("{0} / {1} = {2}", r6, r5, r6 / r5);
+            Console.WriteLine("{0} - {1} = {2}", r6, 2, r6 - 2); 
         }
     }
 }
