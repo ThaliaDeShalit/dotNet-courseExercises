@@ -1,0 +1,4 @@
+1. Yes, since the namespace of the dll is shapeLib, putting it inside a directory called shapeLib makes the exe know to look for the dll in that directory.
+2. No. Now the dll is in a directory with a different name than the name space of the dll, the exe cant find it and throws an error.
+
+12. Yes, as the configuration files direct the exe to search for the shapeLib.dll in its new location.
