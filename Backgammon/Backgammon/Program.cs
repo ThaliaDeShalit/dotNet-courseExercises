@@ -17,19 +17,15 @@ namespace Backgammon
             UI userInterface = new UI();
             sDiceRolls currentRoll;
             
-            // bool isGameAgianstComputer;
-
             GameState currGameState;
             GameOperations gameOperator;
 
             firstPlayerName = userInterface.GetName();
             secondPlayerName = userInterface.GetName();
 
-            // isGameAgainstComputer = UI.PlayAgainstComputer();
-
             while (true)
             {
-                UI.DrawBoard();
+                userInterface.DrawBoard();
 
                 currentRoll = userInterface.RollDice();
 
