@@ -6,23 +6,82 @@ using System.Threading.Tasks;
 
 namespace GameLogic
 {
-    class Player
+    public class Player
     {
         private string _name;
+        private int _removedCheckers; // checkers that the player got out of the board from the "house" section
         private eColor _color;
-        private List<sCoordinateOnBoard> _validMoves;
-        private List<sCoordinateOnBoard> _coordinatesOccupied;
+        private List<int> _columnsOccupied;
+        private bool _isClockwise;
+        private int _outsideCheckers; // checkers the other player "ate"
 
-        public Player(string name, eColor color, List<sCoordinateOnBoard> startingPosition)
+        public Player(string name, eColor color, bool isClockwise)
         {
             _name = name;
+            _removedCheckers = 0;
             _color = color;
-            _validMoves = new List<sCoordinateOnBoard>();
-            _coordinatesOccupied = new List<sCoordinateOnBoard>();
+            _columnsOccupied = null; //todo - must implement
+            _isClockwise = isClockwise;
+            _outsideCheckers = 0;
+        }
 
-            foreach (sCoordinateOnBoard coordinate in startingPosition)
+        public string Name
+        {
+            get
             {
-                _coordinatesOccupied.Add(coordinate);
+                return _name;
+            }
+        }
+
+        public int RemovedCheckers
+        {
+            get
+            {
+                return _removedCheckers;
+            }
+        }
+
+        public eColor Color
+        {
+            get
+            {
+                return _color;
+            }
+        }
+
+        public List<int> ColumnsOccupied
+        {
+            get
+            {
+                return _columnsOccupied;
+            }
+        }
+
+        public bool IsClockwise
+        {
+            get
+            {
+                return _isClockwise;
+            }
+        }
+
+        public int OutsideCheckers
+        {
+            get
+            {
+                return _outsideCheckers;
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj != null && obj as Player == this)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

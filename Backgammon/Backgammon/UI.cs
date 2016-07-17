@@ -22,16 +22,22 @@ namespace Backgammon
             return nameOfPlayer;
         }
 
-        public sDiceRolls RollDice()
+        //public List<int> RollDice()
+        //{
+        //    Console.WriteLine("Please press any key to roll dice");
+        //    Console.ReadLine();
+
+        //    sDiceRolls diceRoll = new sDiceRolls(sDiceRolls.DiceRoll(), sDiceRolls.DiceRoll());
+
+        //    Console.WriteLine("You have rolled {0} and {1}", diceRoll.FirstDice, diceRoll.SecondDice);
+
+        //    return diceRoll;
+        //}
+
+        public void DrawBoard()
         {
-            Console.WriteLine("Please press any key to roll dice");
-            Console.ReadLine();
 
-            sDiceRolls diceRoll = new sDiceRolls(sDiceRolls.DiceRoll(), sDiceRolls.DiceRoll());
-
-            Console.WriteLine("You have rolled {0} and {1}", diceRoll.FirstDice, diceRoll.SecondDice);
-
-            return diceRoll;
         }
+
     }
 }

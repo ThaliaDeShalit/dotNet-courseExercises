@@ -6,45 +6,48 @@ using System.Threading.Tasks;
 
 namespace GameLogic
 {
-    class LogicUtils
+    public struct sMove
     {
-        
-    }
+        private int? _column;
+        private int _die;
+        private eTypeOfMove _type;
 
-    struct sCoordinateOnBoard
-    {
-        private int _x;
-        private int _y;
-
-        public sCoordinateOnBoard(int x, int y)
+        public sMove(int? column, int die, eTypeOfMove type)
         {
-            _x = x;
-            _y = y;
+            _column = column;
+            _die = die;
+            _type = type;
         }
 
-        public int X
+        public int? Column
         {
             get
             {
-                return _x;
+                return _column;
             }
         }
 
-        public int Y
+        public int Die
         {
             get
             {
-                return _y;
+                return _die;
             }
         }
 
+        public eTypeOfMove Type
+        {
+            get
+            {
+                return _type;
+            }
+        }
     }
 
-    public enum eBoardLocation
+    public enum eTypeOfMove 
     {
-        Black,
-        White,
-        Empty
+        In,
+        Regular
     }
 
     public enum eColor
@@ -53,36 +56,10 @@ namespace GameLogic
         White
     }
 
-    public struct sDiceRolls
+    public enum eOccupiedColor
     {
-        int _firstDice;
-        int _secondDice;
-
-        public sDiceRolls(int x, int y)
-        {
-            _firstDice = x;
-            _secondDice = y;
-        }
-
-        public int FirstDice
-        {
-            get
-            {
-                return _firstDice;
-            }
-        }
-
-        public int SecondDice
-        {
-            get
-            {
-                return _secondDice;
-            }
-        }
-
-        public static int DiceRoll()
-        {
-            return new Random().Next(1, 6);
-        }
+        Black,
+        White,
+        Empty
     }
 }
