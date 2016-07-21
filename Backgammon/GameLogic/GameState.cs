@@ -9,19 +9,34 @@ namespace GameLogic
     public class GameState
     {
         private Player _currPlayer;
+        private Player _otherPlayer;
         private Player _firstPlayer;
         private Player _secondPlayer;
         private Column[] _board;
 
-        public GameState(string firstPlayerName, string secondPlayerName)
+        public GameState(string firstPlayerName, string secondPlayerName, int firstPlayerDie, int secondPlayerDie)
         {
-            _firstPlayer = new Player(firstPlayerName, eColor.Black, false);
-
-            _secondPlayer = new Player(secondPlayerName, eColor.White, true);
-
-            _currPlayer = _firstPlayer;
-
             InstantiateBoard();
+
+            _firstPlayer = new Player(firstPlayerName, eColor.White, true, _board);
+
+            _secondPlayer = new Player(secondPlayerName, eColor.Black, false, _board);
+
+            SetPlayerThatPlaysFirst(firstPlayerDie, secondPlayerDie);
+        }
+
+        public void SetPlayerThatPlaysFirst(int firstPlayerDie, int secondPlayerDie)
+        {
+            if (firstPlayerDie > secondPlayerDie)
+            {
+                CurrPlayer = FirstPlayer;
+                OtherPlayer = SecondPlayer;
+            }
+            else
+            {
+                CurrPlayer = SecondPlayer;
+                OtherPlayer = FirstPlayer;
+            }
         }
 
         public Player CurrPlayer
@@ -33,6 +48,18 @@ namespace GameLogic
             private set
             {
                 _currPlayer = value;
+            }
+        }
+
+        public Player OtherPlayer
+        {
+            get
+            {
+                return _otherPlayer;
+            }
+            private set
+            {
+                _otherPlayer = value;
             }
         }
 
@@ -77,7 +104,7 @@ namespace GameLogic
             {
                 if (_board[i] == null)
                 {
-                    _board[i] = new Column(0, eOccupiedColor.Empty)
+                    _board[i] = new Column(0, eOccupiedColor.Empty);
                 }
             }
         }
@@ -87,10 +114,12 @@ namespace GameLogic
             if (CurrPlayer.Equals(FirstPlayer))
             {
                 CurrPlayer = SecondPlayer;
+                OtherPlayer = FirstPlayer;
             }
             else
             {
                 CurrPlayer = FirstPlayer;
+                OtherPlayer = SecondPlayer;
             }
         }
     }

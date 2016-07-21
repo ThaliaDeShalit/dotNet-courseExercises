@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLogic
 {
-    class Column
+    public class Column
     {
         private int _count;
         private eOccupiedColor _color;
