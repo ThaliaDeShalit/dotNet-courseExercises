@@ -49,12 +49,19 @@ namespace LINQToObjects
                          where p.Threads.Count < 5
                          orderby p.Id
                          group p by p.BasePriority into g
-                         select g; // what to return
+                         orderby g.Key
+                         select g; 
             
             Console.WriteLine("results for query 3:");
-            foreach (var p in query3)
+            foreach (IGrouping<int, Process> processesGroup in query3)
             {
-                Console.WriteLine(p);
+                Console.WriteLine("Processes with base priority {0} are:", processesGroup.Key);
+
+                foreach (var process in processesGroup)
+                {
+                    Console.WriteLine(process.ProcessName);
+                } 
+                Console.WriteLine();
             }
             Console.WriteLine();
 
@@ -62,24 +69,15 @@ namespace LINQToObjects
 
             Console.WriteLine("num of threads is {0}", query4);
 
+            // showing copyTo works :)
+            Exception e1 = new Exception("Hello", new Exception("goodbye"));
+            Exception e2 = new Exception("bye");
 
-        }
+            e1.HelpLink = "http://www.google.com";
 
-        public static void CopyTo(this object obj, object otherObj)
-        {
-            var query = from p in obj.GetType().GetProperties()
-                             from q in otherObj.GetType().GetProperties()
-                             where p.CanRead && q.CanWrite && p.Name == q.Name
-                             select new
-                             {
-                                 p,
-                                 q
-                             };
+            e1.CopyTo(e2);
 
-            foreach (var v in query)
-            {
-                v.q.SetValue(otherObj, v.p.GetValue(obj));
-            }
+            Console.WriteLine("e2's helplink is - {0}", e2.HelpLink);
         }
     }
 }
