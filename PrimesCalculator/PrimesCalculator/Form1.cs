@@ -14,24 +14,28 @@ namespace PrimesCalculator
 {
     public partial class Form1 : Form
     {
+        private static CancellationTokenSource cts = new CancellationTokenSource();
+        private static CancellationToken ct = cts.Token;
+
         private static EventWaitHandle ewh = new EventWaitHandle(false, EventResetMode.AutoReset);
         private static EventWaitHandle threadExitewh = new EventWaitHandle(false, EventResetMode.AutoReset);
 
         public Form1()
         {
             InitializeComponent();
+            ct.Register(CancelMethod);
         }
 
         private void buttonCalculate_Click(object sender, EventArgs e)
         {
-
             Thread t = new Thread(CalculatePrimes);
-            
-            t.Start();
-            
+
+            t.Start(cts);
+
+
         }
 
-        private void CalculatePrimes()
+        private void CalculatePrimes(object cts)
         {
             ArrayList primeNumbers = new ArrayList();
             int from, to;
@@ -42,7 +46,8 @@ namespace PrimesCalculator
                 {
                     if (ewh.WaitOne(0))
                     {
-                        threadExitewh.Set();
+                        //threadExitewh.Set();
+                        ((CancellationTokenSource)cts).Cancel();
                         Thread.CurrentThread.Abort();
                     }
                     else
@@ -66,7 +71,7 @@ namespace PrimesCalculator
             }
         }
 
-        
+
         private bool isPrime(int num)
         {
             if (num <= 1)
@@ -89,14 +94,33 @@ namespace PrimesCalculator
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(TerminateCalculatingThread);
-            t.Start();
-        }
-        private void TerminateCalculatingThread()
-        {
-            //Program.Cts.Cancel();
 
-            WaitHandle.SignalAndWait(ewh, threadExitewh);
+            ewh.Set();
+            try
+            {
+                while (true)
+                {
+                    ct.ThrowIfCancellationRequested();
+                }
+            }
+            catch
+            {
+
+            }
+
+            //Thread t = new Thread(TerminateCalculatingThread);
+            //t.Start();
+        }
+        //private void TerminateCalculatingThread()
+        //{
+        //    //Program.Cts.Cancel();
+
+        //    WaitHandle.SignalAndWait(ewh, threadExitewh);
+        //}
+
+        private void CancelMethod()
+        {
+            MessageBox.Show("Calculation canceled");
         }
     }
 }
